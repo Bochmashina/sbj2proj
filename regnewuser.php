@@ -1,5 +1,8 @@
 <?php
 	session_start();
+	if(!isset($_SESSION['id'])){
+		header("Location:login.php");
+	}
 	$userid=$_SESSION['id'];
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -21,7 +24,7 @@
 				$pwd=$_POST['password'];
 				$studentid=$_POST['studentid'];
 				$samecount=0;
-				
+					
 				$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
 				$sql = "SELECT * FROM `users`";
 				$query = $conn->query($sql) or die("failed!");
@@ -46,5 +49,6 @@
 				}
 			}
 		?>
+		<a href="home.php">Назад</a>
 	</body>
 </html>

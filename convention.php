@@ -1,9 +1,13 @@
 <?php
 	session_start();
+	if(!isset($_SESSION['username'])){
+		header("Location:login.php");
+	}
 	$username = $_SESSION['username'];
 	$userid = $_SESSION['id'];
 	$studentof = $_SESSION['studentof'];
 	$convname=$_GET['category'];
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -11,7 +15,8 @@
 	<link href="style/homestyle.css" rel="stylesheet">
 </head>
 	<body>
-		<h2><?php echo $convname;?></h2>
+		<h2><?php if(isset($_SESSION['username'])) echo $convname;?></h2>
+		<a href="home.php">Назад</a><br>
 		<?php
 			$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
 			$sql = "SELECT DISTINCT`timeslots`.`FromHour`, `timeslots`.`FromMins`,`timeslots`.`ToHour`,`timeslots`.`ToMins`, `timeslots`.`StudentID`
@@ -45,12 +50,13 @@
 					echo "<input type='$hidden' name='$tohour' value='$timeTHour'>" . $row['ToHour'] . ":";
 					echo "<input type='$hidden' name='$tomins' value='$timeTMins'>" . $row['ToMins'] . " ";
 					echo "<br>";
-					if($idcheck==""){
+					if($idcheck=="" && $userid>=10){
 						echo "<input type='$submit' name='$enterbtn' value='$enter'></form>";
 						echo "<br>";
 					}
 				}
 				else{
+					echo "<br>";
 					echo $row['FromHour'] . ":" . $row['FromMins'] . " " . $row['ToHour'] . ":" . $row['ToMins'];
 					echo "<br><b>" . "Номер: ". "$studentID</b><br>";
 					if($userid==$studentID){
@@ -76,7 +82,7 @@
 					$query = $conn->query($sql) or die("failed!");
 					echo "<meta http-equiv='refresh' content='0'>";
 				}
-				
+					
 			}
 		?>
 	</body>

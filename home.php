@@ -1,5 +1,8 @@
 <?php
 	session_start();
+	if(!isset($_SESSION['username'])){
+		header("Location:login.php");
+	}
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -28,14 +31,27 @@
 					echo "<br>";
 				}
 			}
+			echo "<br>";
 			if($userid < 10)
 			{
 				$link="convcreator.php";
 				$link2="regnewuser.php";
 				echo "<br>";
 				echo "<a href='$link'>Създаване на конференция</a>";
-				echo "<br>";
+				echo "<br><br>";
 				echo "<a href='$link2'>Регистриране на потребител</a>";
+				echo "<br><br>";
+			}
+		?>
+		<form method="post">
+			<input type="submit" name="logout" value="Изход">
+		</form>
+		<?php
+			if($_POST){
+				if(!empty($_POST['logout'])){
+					session_destroy();
+					header("Location:login.php");
+				}
 			}
 		?>
 	</body>

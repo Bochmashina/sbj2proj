@@ -1,5 +1,8 @@
 <?php
 	session_start();
+	if(!isset($_SESSION['username'])){
+		header("Location:login.php");
+	}
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -18,10 +21,10 @@
 	</form>
 	<?php
 		if($_POST)
-		{
+		{ 		
 			$username = $_SESSION['username'];
 			$userid = $_SESSION['id'];
-			
+				
 			$convname=$_POST['Name'];
 			$convtimer=$_POST['Timer'];
 			$convfromhour=$_POST['FromHour'];
@@ -50,15 +53,14 @@
 								'$slottohour','$slottomins','$userid','0');";
 						$slotfrommins=$slottomins;
 						$convfromhour=$slottohour;
-						
+							
 					}
-					echo $sql;
 					$result=$conn->query($sql);
-					header("Location: handler.php");
+					header("Location: home.php");
+					}
 				}
-			}
-			
 		}
 	?>
+	<a href="home.php">Назад</a>
 </body>
 </html>
