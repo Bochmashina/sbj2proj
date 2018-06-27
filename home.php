@@ -27,7 +27,7 @@
 				if($row['LecturerID']==$studentof)
 				{
 					$coname=$row['Name'];
-					echo "<a href='$convlink$coname'>" . $row['Name'] . "</a>";
+					echo "<a href='$convlink$coname'>" . $coname . "</a>";
 					echo "<br>";
 				}
 			}
