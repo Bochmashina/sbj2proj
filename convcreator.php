@@ -50,12 +50,12 @@
 							$slottohour+=1;
 						}
 						$sql .= "INSERT INTO `timeslots` VALUES ('$convname','$convfromhour','$slotfrommins',
-								'$slottohour','$slottomins','$userid','0');";
+								'$slottohour','$slottomins','$userid','0','0');";
 						$slotfrommins=$slottomins;
 						$convfromhour=$slottohour;
 							
 					}
-					$result=$conn->query($sql);
+					$result=$conn->query($sql) or die ("failed!");
 					header("Location: home.php");
 					}
 				}
