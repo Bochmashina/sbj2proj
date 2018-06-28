@@ -106,7 +106,42 @@
 	<input id="Pause" type="button" value="Pause"
         onclick="pause();" />-->
 		<input id="btnStart" type="button" value="Start"
-        onclick="printDuration();" />
+        onclick="showAlert();" />
 	<p id="para"><?php echo $timermins . " : " . $timersecs;?></p>
+  
+  <h1>Lights Example</h1>
+
+  <input type=submit value="ALL ON" onclick="allOn();" />
+  <div id="popUp">
+      aaaaa
+    </div>
+	<script type="text/javascript">
+
+    var popUp = document.getElementById("popUp");
+	//var intervals = [10000,30000,60000,120000];
+	var intervals = [1000, 2000, 4000];
+
+	var showPopUp = function(timeLeft) {
+	popUp.textContent = "Остават още " + (timeLeft / 1000) + " секунди.";
+	popUp.style.display = "block";
+	setTimeout(function() {
+		hidePopUp()
+	}, 5000);
+	};
+	var hidePopUp = function() {
+	popUp.style.display = "none";
+	//makeInterval(intervals.pop());
+	};
+
+	var makeInterval = function(nextInterval) {
+	if (!nextInterval) return;
+	showPopUp(nextInterval);
+	setTimeout(function() {
+		makeInterval(intervals.pop())
+	}, nextInterval);
+	};
+	//starts the damn thing with 120000
+	makeInterval(intervals.pop());
+  </script>
 </body>
 </html>

@@ -9,13 +9,16 @@
 	$convname=$_GET['category'];
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<head>
-    <title>Конференции</title>
-	<link href="style/homestyle.css" rel="stylesheet">
-</head>
+	<head>
+		<title>Конференции</title>
+		<link href="style/homestyle.css" rel="stylesheet">
+	</head>
 	<body>
 		<h2><?php if(isset($_SESSION['username'])) echo $convname;?></h2>
 		<a href="home.php">Назад</a><br>
+		<div id="popUp" align="center" style="display: none;">
+			Този див казва колко време остава (напр: 2 минути, 1 минута)
+		</div>
 		<?php
 			if($userid<10){
 		?>
@@ -64,37 +67,9 @@
 							$timersecs=0;
 							echo "<br>$timeFHour:$timeFMins $timeTHour:$timeTMins<br>";
 							echo "<b>Номер: $studentID</b><br>";
-			?>				
-							
-			<p style="margin:0.3%"id="para"><?php echo $timermins . " : " . $timersecs;?></p>
-			<input id="btnStart" type="button" value="Start" onclick="printDuration();"/>
-			<script type="text/javascript">
-			//Timer script
-				var mins="<?php echo $timermins; ?>";
-				var secs="<?php echo $timersecs;?>";
-				function printDuration() {
-						setInterval(function () {
-							if(mins==0){
-								if(secs>0){
-									secs-=1;
-								}
-								document.getElementById("para").innerHTML = mins+" : "+secs;
-							}
-							if(mins>0){
-								if(secs==0){
-									secs=59;
-									mins-=1;	
-								}
-								else{
-									secs -= 1;	
-								}
-								document.getElementById("para").innerHTML = mins+" : "+secs;
-							}
-							
-						
-						}, 1000);
-				}
-			</script>
+			?>							
+				<p style="margin:0.3%" id="<?php echo $studentID;?>"><?php echo $timermins . " : " . $timersecs;?></p>
+				<input type="button" id="<?php echo $studentID;?>.btn" value="Старт" onclick="printDuration(this.id)"/><br>
 			<?php
 						}
 					}
@@ -154,5 +129,55 @@
 					
 			}
 		?>
+		
+		<script type="text/javascript">
+			//Timer script
+				var popUp = document.getElementById("popUp");
+				var showPopUp = function(timeLeft) {
+					popUp.textContent = "Остават още " + timeLeft + " минути.";
+					popUp.style.width = "17%";
+					popUp.style.height = "auto";
+					popUp.style.fontSize = "150%";
+					popUp.style.background = "red";
+					popUp.style.margin = "0 auto";
+					popUp.style.display = "block";
+					setTimeout(function() {
+					hidePopUp()
+					}, 2000);
+				};
+				var hidePopUp = function() {
+				popUp.style.display = "none";
+				};
+				function printDuration(id) {
+					var mins="<?php echo $timermins; ?>";
+					var secs="<?php echo $timersecs;?>";
+					setInterval(function () {
+						if(mins==2 && secs==1){
+							showPopUp(2);
+						}
+						if(mins==1 && secs==1){
+							showPopUp(1);
+						}
+						if(mins==0){
+							if(secs>0){
+								secs-=1;
+							}
+							document.getElementById(id.split(".")[0]).innerHTML = mins+" : "+secs;
+						}
+						if(mins>0){
+							if(secs==0){
+								secs=59;
+								mins-=1;	
+							}
+							else{
+								secs -= 1;	
+							}
+							document.getElementById(id.split(".")[0]).innerHTML = mins+" : "+secs;
+						}
+						
+					
+					}, 1000);
+			    }
+			</script>
 	</body>
 </html>
