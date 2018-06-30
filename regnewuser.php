@@ -19,7 +19,7 @@
 			<input id="regsubmitBtn" type="submit" value="Регистриране">
 		</form>
 		<?php
-			if($_POST){
+			if(!empty($_POST['name']) && !empty($_POST['studentid'])){
 				$uname=$_POST['name'];
 				$pwd=$_POST['password'];
 				$studentid=$_POST['studentid'];
@@ -36,10 +36,12 @@
 				}
 				if($samecount==1){ //има такова id или потр.име в таблицата
 					echo "Вече съществува потребител с такова потр. име или ID";
+					echo "<br>";
 				}
 				else{
 					if($studentid<10){
 						echo "Уникалният номер на студента трябва да е >= 10";
+						echo "<br>";
 					}
 					else{
 						$hash = password_hash($pwd, PASSWORD_DEFAULT);

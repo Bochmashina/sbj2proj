@@ -13,14 +13,14 @@
 <body>
 	<h2>Създаване на конференция</h2>
 	<form id="creatorform" action="" method="post">
-		Име на конфренецията: <input id="name" type="text" name="Name"><br>
-		Големина на слота: <input id="slot" type="text" name="Timer"><br>
-		Начало на конфренецията: <input id="begin" type="text" name="FromHour"><br>
-		Край на конфренецията: <input id="end" type="text" name="ToHour"><br>
+		Име на конфренецията: <input id="name" type="text" name="Name" required><br>
+		Големина на слота: <input id="slot" type="text" name="Timer" required><br>
+		Начало на конфренецията: <input id="begin" type="text" name="FromHour" required><br>
+		Край на конфренецията: <input id="end" type="text" name="ToHour" required><br>
 		<input id="createsubmitBtn" type="submit" value="Създаване">
 	</form>
 	<?php
-		if($_POST)
+		if(!empty($_POST['Name']))
 		{ 		
 			$username = $_SESSION['username'];
 			$userid = $_SESSION['id'];
