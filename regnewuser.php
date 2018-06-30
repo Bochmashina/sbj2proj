@@ -19,7 +19,7 @@
 			<input id="regsubmitBtn" type="submit" value="Регистриране">
 		</form>
 		<?php
-			if(!empty($_POST['name']) && !empty($_POST['studentid'])){
+			if(!empty($_POST['name'])  && !empty($_POST['password']) && !empty($_POST['studentid'])){
 				$uname=$_POST['name'];
 				$pwd=$_POST['password'];
 				$studentid=$_POST['studentid'];

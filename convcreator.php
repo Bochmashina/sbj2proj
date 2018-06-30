@@ -20,7 +20,7 @@
 		<input id="createsubmitBtn" type="submit" value="Създаване">
 	</form>
 	<?php
-		if(!empty($_POST['Name']))
+		if(!empty($_POST['Name']) && !empty($_POST['Timer']) && !empty($_POST['FromHour']) && !empty($_POST['ToHour']))
 		{ 		
 			$username = $_SESSION['username'];
 			$userid = $_SESSION['id'];
