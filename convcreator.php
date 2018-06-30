@@ -8,16 +8,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title>Създаване на конференция</title>
-	<link href="style/homestyle.css" rel="stylesheet">
+	<link href="style/style.css" rel="stylesheet">
 </head>
 <body>
 	<h2>Създаване на конференция</h2>
-	<form action="" method="post">
-		Име на конфренецията: <input type="text" name="Name"><br>
-		Големина на слота: <input type="text" name="Timer"><br>
-		Начало на конфренецията: <input type="text" name="FromHour"><br>
-		Край на конфренецията: <input type="text" name="ToHour"><br>
-		<input type="submit">
+	<form id="creatorform" action="" method="post">
+		Име на конфренецията: <input id="name" type="text" name="Name"><br>
+		Големина на слота: <input id="slot" type="text" name="Timer"><br>
+		Начало на конфренецията: <input id="begin" type="text" name="FromHour"><br>
+		Край на конфренецията: <input id="end" type="text" name="ToHour"><br>
+		<input id="createsubmitBtn" type="submit" value="Създаване">
 	</form>
 	<?php
 		if($_POST)
@@ -32,10 +32,12 @@
 			if($convfromhour>=$convtohour)
 			{
 				echo "Краят на конференцията трябва да е СЛЕД началото!";
+				echo "<br>";
 			}
 			else{
 				if(($convtimer/60) > ($convtohour-$convfromhour)){
 					echo "Големината на слота разделя конференцията на еднакви слотове. Не може да е по-голяма от времетраенето на конференцията";
+					echo "<br>";
 				}
 				else{
 					$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
@@ -60,6 +62,7 @@
 					}
 				}
 		}
+
 	?>
 	<a href="home.php">Назад</a>
 </body>

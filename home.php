@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
 		<title>Конференции</title>
-		<link href="style/homestyle.css" rel="stylesheet">
+		<link href="style/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<h2>Конференции</h2>
@@ -36,7 +36,7 @@
 			{
 				$link="convcreator.php";
 				$link2="regnewuser.php";
-				echo "<br>";
+				echo "<br><br><br>";
 				echo "<a href='$link'>Създаване на конференция</a>";
 				echo "<br><br>";
 				echo "<a href='$link2'>Регистриране на потребител</a>";
@@ -44,7 +44,7 @@
 			}
 		?>
 		<form method="post">
-			<input type="submit" name="logout" value="Изход">
+			<input id="homesubmitBtn" type="submit" name="logout" value="Изход">
 		</form>
 		<?php
 			if($_POST){

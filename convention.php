@@ -11,20 +11,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
 		<title>Конференции</title>
-		<link href="style/homestyle.css" rel="stylesheet">
+		<link href="style/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<h2><?php if(isset($_SESSION['username'])) echo $convname;?></h2>
 		<a href="home.php">Назад</a><br>
-		<div id="popUp" align="center" style="display: none;">
+		<div id="popUp" align="center">
 			Този див казва колко време остава (напр: 2 минути, 1 минута)
 		</div>
 		<?php
 			if($userid<10){
 		?>
-		<form method="post">
-			<br><input type="submit" name="beginconf" value="Начало на конференцията"></input>
-			<input type="submit" name="endconf" value="Край на конференцията"></input><br>
+		<form id="convform" method="post">
+			<input id="begin" type="submit" name="beginconf" value="Начало на конференцията"></input><br>
+			<input id="end" type="submit" name="endconf" value="Край на конференцията"></input><br>
 		</form>
 		<?php
 			}
@@ -135,11 +135,6 @@
 				var popUp = document.getElementById("popUp");
 				var showPopUp = function(timeLeft) {
 					popUp.textContent = "Остават още " + timeLeft + " минути.";
-					popUp.style.width = "17%";
-					popUp.style.height = "auto";
-					popUp.style.fontSize = "150%";
-					popUp.style.background = "red";
-					popUp.style.margin = "0 auto";
 					popUp.style.display = "block";
 					setTimeout(function() {
 					hidePopUp()

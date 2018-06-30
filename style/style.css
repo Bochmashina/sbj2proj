@@ -1,0 +1,178 @@
+body {
+	text-align:center;
+}
+a{
+	font-size:125%;
+	text-decoration:none;
+	color:black;
+}
+a:hover{
+	color:lightblue;
+}
+
+#loginform {
+	margin-left:35%;
+	padding-top:1%;
+	width:30%;
+	height:12%;
+	background-color:#b5e7a0;
+}
+#loginform > #pwd {
+	margin-left:18.5%;
+	margin-top:1%;
+	margin-bottom:1%;
+}
+
+.submitBtn {
+
+	background: #0066A2;
+
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 30%;
+
+	width: 15%;
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+
+}
+#homesubmitBtn{
+	background: #0066A2;
+
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 5%; 
+
+	width: 5%; 
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+}
+
+#creatorform {
+	margin-left:35%;
+	padding-top:1%;
+	width:30%;
+	height:22%;
+	background-color:lightblue;
+}
+#creatorform > #name{
+	margin-left:11%;
+}
+
+#creatorform > #slot{
+	margin-left:18%;
+	margin-top:1%;
+}
+
+#creatorform > #begin{
+	margin-left:6.5%;
+	margin-top:1%;
+}
+
+#creatorform > #end{
+	margin-left:10%;
+	margin-top:1%;
+}
+
+#createsubmitBtn{
+	background: #0066A2;
+
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 25%;
+
+	width: 22%;
+	
+	margin-top:1%;
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+}
+#regform {
+	margin-left:35%;
+	padding-top:1%;
+	width:30%;
+	height:17%;
+	color:white;
+	background-color:maroon;
+}
+
+#regform > #name {
+	margin-left:15.7%;
+}
+#regform > #pass {
+	margin-left:34.5%;
+	margin-top:1%;
+}
+#regform > #id {
+	margin-left:2%;
+	margin-top:1%;
+}
+#regsubmitBtn{
+	background: #0066A2;
+
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 25%;
+
+	width: 27%;
+	
+	margin-top:1%;
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+}
+#convform > input {
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 5%;
+
+	width: 15%;
+	
+	margin-top:1%;
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+}
+#convform > #begin {
+	background: #03b103;
+}
+#convform > #end {
+	background: #ec0d0d;
+}
+
+#popUp {
+	display: none;
+	width: 17%;
+	height : auto;
+	font-size : 150%;
+	background-color: red;
+	margin:0 auto;
+} 

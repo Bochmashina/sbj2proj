@@ -8,15 +8,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
 		<title>Регистриране на нов потребител</title>
-		<link href="style/homestyle.css" rel="stylesheet">
+		<link href="style/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<h2>Регистриране на нов потребител</h2>
-		<form action="" method="post">
-			Потребителско име: <input type="text" name="name" required><br>
-			Парола: <input type="text" name="password" id="pwd" required><br>
-			Уникален номер на студента: <input type="text" name="studentid" required><br>
-			<input type="submit" value="Регистриране">
+		<form id="regform" action="" method="post">
+			Потребителско име: <input id="name" type="text" name="name" required><br>
+			Парола: <input id="pass" type="text" name="password" id="pwd" required><br>
+			Уникален номер на студента: <input id="id" type="text" name="studentid" required><br>
+			<input id="regsubmitBtn" type="submit" value="Регистриране">
 		</form>
 		<?php
 			if($_POST){

@@ -4,14 +4,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title>Начална страница</title>
-	<link href="style/homestyle.css" rel="stylesheet">
+	<link href="style/style.css" rel="stylesheet">
 </head>
 <body>
 	<h2>Система за организиране на студентска конференция</h2>
-	<form action="" method="post">
+	<form id="loginform" action="" method="post">
 		Потребителско име: <input type="text" name="name"><br>
 		Парола: <input type="password" name="password" id="pwd"><br>
-		<input type="submit" value="Вход">
+		<input class="submitBtn" type="submit" value="Вход">
 	</form>
 	<?php
 		if($_POST){
