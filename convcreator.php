@@ -3,6 +3,12 @@
 	if(!isset($_SESSION['username'])){
 		header("Location:login.php");
 	}
+	$ini_array = parse_ini_file("config/config.ini");
+	$dbhost=$ini_array['host'];
+	$dbname=$ini_array['name'];
+	$dbcharset=$ini_array['charset'];
+	$dbuser=$ini_array['user'];
+	$dbpass=$ini_array['password'];
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -40,7 +46,7 @@
 					echo "<br>";
 				}
 				else{
-					$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
+					$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset='.$dbcharset. '', $dbuser, $dbpass);
 					$sql = "INSERT INTO `conventions` VALUES ('$convname','$userid','$username','$convtimer','$convfromhour','$convtohour');";
 					$slotfrommins=0;
 					$slottomins=0;

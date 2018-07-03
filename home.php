@@ -3,6 +3,12 @@
 	if(!isset($_SESSION['username'])){
 		header("Location:login.php");
 	}
+	$ini_array = parse_ini_file("config/config.ini");
+	$dbhost=$ini_array['host'];
+	$dbname=$ini_array['name'];
+	$dbcharset=$ini_array['charset'];
+	$dbuser=$ini_array['user'];
+	$dbpass=$ini_array['password'];
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -18,7 +24,7 @@
 			$userid = $_SESSION['id'];
 			$studentof = $_SESSION['studentof'];
 			
-			$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
+			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset='.$dbcharset. '', $dbuser, $dbpass);
 			$sql = "SELECT * FROM `conventions` WHERE `LecturerID`='$studentof'";
 			$query = $conn->query($sql) or die("failed!");
 
@@ -36,10 +42,13 @@
 			{
 				$link="convcreator.php";
 				$link2="regnewuser.php";
+				$link3="regmanyusers.php";
 				echo "<br><br><br>";
 				echo "<a href='$link'>Създаване на конференция</a>";
 				echo "<br><br>";
-				echo "<a href='$link2'>Регистриране на потребител</a>";
+				echo "<a href='$link2'>Регистриране на един студент</a>";
+				echo "<br><br>";
+				echo "<a href='$link3'>Регистриране на много студенти (csv)</a>";
 				echo "<br><br>";
 			}
 		?>

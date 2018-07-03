@@ -144,6 +144,33 @@ a:hover{
 
 	text-shadow:none;
 }
+#regformmany {
+	margin-left:35%;
+	padding-top:1%;
+	width:30%;
+	height:8%;
+	color:white;
+	background-color:maroon;
+}
+#regmanyBtn{
+	background: #0066A2;
+
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 50%;
+
+	width: 27%;
+	
+	margin-top:1%;
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+}
 #convform > input {
 	color: white;
 

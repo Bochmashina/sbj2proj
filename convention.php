@@ -7,6 +7,12 @@
 	$userid = $_SESSION['id'];
 	$studentof = $_SESSION['studentof'];
 	$convname=$_GET['category'];
+	$ini_array = parse_ini_file("config/config.ini");
+	$dbhost=$ini_array['host'];
+	$dbname=$ini_array['name'];
+	$dbcharset=$ini_array['charset'];
+	$dbuser=$ini_array['user'];
+	$dbpass=$ini_array['password'];
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
@@ -24,11 +30,11 @@
 		?>
 		<form id="convform" method="post">
 			<input id="begin" type="submit" name="beginconf" value="Начало на конференцията"></input><br>
-			<input id="end" type="submit" name="endconf" value="Край на конференцията"></input><br>
+			<input id="end" type="submit" name="endconf" value="Край на конференцията" onclick="save()"></input><br>
 		</form>
 		<?php
 			}
-			$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
+			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset='.$dbcharset. '', $dbuser, $dbpass);
 			$sql = "SELECT DISTINCT`timeslots`.`FromHour`, `timeslots`.`FromMins`,`timeslots`.`ToHour`,`timeslots`.`ToMins`, `timeslots`.`StudentID`, `timeslots`.`hasStarted`
 					FROM `timeslots` INNER JOIN `users` ON `timeslots`.`LecturerID`=`users`.`studentof` AND `timeslots`.`ConvName`='$convname'";
 			$query = $conn->query($sql) or die("failed!");
@@ -70,6 +76,17 @@
 			?>							
 				<p style="margin:0.3%" id="<?php echo $studentID;?>"><?php echo $timermins . " : " . $timersecs;?></p>
 				<input type="button" id="<?php echo $studentID;?>.btn" value="Старт" onclick="printDuration(this.id)"/><br>
+				<textarea><?php echo $studentID;?>: </textarea>
+				<br>
+				Оценка:			
+				<select>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+				<select>
+				<br>
 			<?php
 						}
 					}
@@ -144,6 +161,11 @@
 				popUp.style.display = "none";
 				};
 				function printDuration(id) {
+					var win=window.open('', 'Timer');
+					win.document.body.style.fontSize = "1500%";
+					win.document.body.style.textAlign= "center";
+					var winpara=document.createElement('p');
+					win.document.body.appendChild(winpara);
 					var mins="<?php echo $timermins; ?>";
 					var secs="<?php echo $timersecs;?>";
 					setInterval(function () {
@@ -158,6 +180,7 @@
 								secs-=1;
 							}
 							document.getElementById(id.split(".")[0]).innerHTML = mins+" : "+secs;
+							win.document.body.innerHTML = mins+" : "+secs;
 						}
 						if(mins>0){
 							if(secs==0){
@@ -168,11 +191,30 @@
 								secs -= 1;	
 							}
 							document.getElementById(id.split(".")[0]).innerHTML = mins+" : "+secs;
+							win.document.body.innerHTML = mins+" : "+secs;
 						}
-						
 					
 					}, 1000);
 			    }
+				
+				function save() {
+				var commasv="";
+				var textareas = document.getElementsByTagName('textarea');
+				var selects = document.getElementsByTagName("select");
+				for(var i = 0; i < textareas.length; i++) {
+					var studid=textareas[i].value.split(":")[0];
+					var comments=textareas[i].value.split(":")[1];
+					commasv+=studid + ";" + comments + ";" + selects[i].options[selects[i].selectedIndex].value + "\r\n";
+				}
+                var a = document.createElement('a');
+                with (a) {
+                    href='data:text/csv;base64,' + btoa(commasv);
+                    download='<?php echo $convname;?>' + '.csv';
+                }
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
 			</script>
 	</body>
 </html>

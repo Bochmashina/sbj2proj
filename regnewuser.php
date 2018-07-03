@@ -4,6 +4,12 @@
 		header("Location:login.php");
 	}
 	$userid=$_SESSION['id'];
+	$ini_array = parse_ini_file("config/config.ini");
+	$dbhost=$ini_array['host'];
+	$dbname=$ini_array['name'];
+	$dbcharset=$ini_array['charset'];
+	$dbuser=$ini_array['user'];
+	$dbpass=$ini_array['password'];
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
@@ -15,7 +21,7 @@
 		<form id="regform" action="" method="post">
 			Потребителско име: <input id="name" type="text" name="name" required><br>
 			Парола: <input id="pass" type="text" name="password" id="pwd" required><br>
-			Уникален номер на студента: <input id="id" type="text" name="studentid" required><br>
+			Факултетен номер на студента: <input id="id" type="text" name="studentid" required><br>
 			<input id="regsubmitBtn" type="submit" value="Регистриране">
 		</form>
 		<?php
@@ -25,7 +31,7 @@
 				$studentid=$_POST['studentid'];
 				$samecount=0;
 					
-				$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
+				$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset='.$dbcharset. '', $dbuser, $dbpass);
 				$sql = "SELECT * FROM `users`";
 				$query = $conn->query($sql) or die("failed!");
 				while($row = $query->fetch()){
