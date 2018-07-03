@@ -16,6 +16,7 @@
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
+		<meta charset="UTF-8">
 		<title>Конференции</title>
 		<link href="style/style.css" rel="stylesheet">
 	</head>
@@ -76,7 +77,7 @@
 			?>							
 				<p style="margin:0.3%" id="<?php echo $studentID;?>"><?php echo $timermins . " : " . $timersecs;?></p>
 				<input type="button" id="<?php echo $studentID;?>.btn" value="Старт" onclick="printDuration(this.id)"/><br>
-				<textarea><?php echo $studentID;?>: </textarea>
+				<textarea id="<?php echo $studentID;?>.txtarea"><?php echo $studentID;?>: </textarea>
 				<br>
 				Оценка:			
 				<select>
@@ -121,7 +122,19 @@
 					}
 				}
 				else{ //Convention has started
-					
+					if($userid>=10){
+						if($row['StudentID']>0){
+							$studentID=$row['StudentID'];
+							$timeFHour=$row['FromHour'];
+							$timeFMins=$row['FromMins'];
+							$timeTHour=$row['ToHour'];
+							$timeTMins=$row['ToMins'];
+							$timermins=$row['ToMins']-$row['FromMins'];
+							$timersecs=0;
+							echo "<br>$timeFHour:$timeFMins $timeTHour:$timeTMins<br>";							
+							echo "<b>Номер: $studentID</b><br>";
+						}
+					}
 				}
 			}
 			if($_POST){
@@ -199,16 +212,18 @@
 				
 				function save() {
 				var commasv="";
+				var lecturer=<?php echo $userid;?>;
+				var today=new Date();
 				var textareas = document.getElementsByTagName('textarea');
 				var selects = document.getElementsByTagName("select");
 				for(var i = 0; i < textareas.length; i++) {
 					var studid=textareas[i].value.split(":")[0];
 					var comments=textareas[i].value.split(":")[1];
-					commasv+=studid + ";" + comments + ";" + selects[i].options[selects[i].selectedIndex].value + "\r\n";
+					commasv+=studid + ";" + comments + ";" + selects[i].options[selects[i].selectedIndex].value + ";" + today + ";" + lecturer + "\r\n";
 				}
                 var a = document.createElement('a');
                 with (a) {
-                    href='data:text/csv;base64,' + btoa(commasv);
+                    href='data:text/csv;charset=utf-8,%EF%BB%BF' + commasv;
                     download='<?php echo $convname;?>' + '.csv';
                 }
                 document.body.appendChild(a);
