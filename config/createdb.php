@@ -1,8 +1,14 @@
 <?php
+	$ini_array = parse_ini_file("config.ini");
+	$dbhost=$ini_array['host'];
+	$dbname=$ini_array['name'];
+	$dbcharset=$ini_array['charset'];
+	$dbuser=$ini_array['user'];
+	$dbpass=$ini_array['password'];
 	try {
-		$conn = new PDO("mysql:host=localhost", 'root','');
+		$conn = new PDO('mysql:host='.$dbhost.'', $dbuser, $dbpass);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "CREATE DATABASE IF NOT EXISTS wwwprojectdb";
+		$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 
 		$conn->exec($sql);
 		echo "Created DB <br>";
@@ -106,7 +112,7 @@
 	";
 	
 	try {
-		$conn = new PDO('mysql:host=localhost;dbname=wwwprojectdb;charset=utf8', 'root', '');
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset='.$dbcharset. '', $dbuser, $dbpass);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$conn->query($tablesql);
 		echo "Created tables";
