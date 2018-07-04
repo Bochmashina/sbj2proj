@@ -47,14 +47,14 @@
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
 	
-		INSERT INTO `conventions` (`Name`, `LecturerID`, `LecturerUName`, `Timer`, `FromHour`, `ToHour`) VALUES
+		INSERT IGNORE INTO `conventions` (`Name`, `LecturerID`, `LecturerUName`, `Timer`, `FromHour`, `ToHour`) VALUES
 	('Представяне на реферати', 1, 'lecturer1', 10, 9, 17);
 	
-		INSERT INTO `timeslots` (`ConvName`, `FromHour`, `FromMins`, `ToHour`, `ToMins`, `LecturerID`, `StudentID`, `hasStarted`) VALUES
+		INSERT IGNORE INTO `timeslots` (`ConvName`, `FromHour`, `FromMins`, `ToHour`, `ToMins`, `LecturerID`, `StudentID`, `hasStarted`) VALUES
 	('Представяне на реферати', 9, 0, 9, 10, 1, 0, 0),
-	('Представяне на реферати', 9, 10, 9, 20, 1, 11, 0),
+	('Представяне на реферати', 9, 10, 9, 20, 1, 0, 0),
 	('Представяне на реферати', 9, 20, 9, 30, 1, 0, 0),
-	('Представяне на реферати', 9, 30, 9, 40, 1, 10, 0),
+	('Представяне на реферати', 9, 30, 9, 40, 1, 0, 0),
 	('Представяне на реферати', 9, 40, 9, 50, 1, 0, 0),
 	('Представяне на реферати', 9, 50, 10, 0, 1, 0, 0),
 	('Представяне на реферати', 10, 0, 10, 10, 1, 0, 0),
@@ -100,14 +100,16 @@
 	('Представяне на реферати', 16, 40, 16, 50, 1, 0, 0),
 	('Представяне на реферати', 16, 50, 17, 0, 1, 0, 0);
 
-		INSERT INTO `users` (`Username`, `Password`, `id`, `studentof`) VALUES
+		INSERT IGNORE INTO `users` (`Username`, `Password`, `id`, `studentof`) VALUES
 	('lecturer1', '$parolata', 1, 1),
-	('lecturer2', '$parolata', 2, 2),
-	('student1', '$asdf', 10, 1),
-	('student11', '$asdf', 11, 1);
+	('lecturer2', '$parolata', 2, 2);
 	
 		ALTER TABLE `users`
 	ADD UNIQUE KEY `id` (`id`);
+		
+		ALTER TABLE `conventions`
+	ADD UNIQUE KEY `Name` (`Name`);
+	
 	
 	";
 	

@@ -211,7 +211,7 @@
 			    }
 				
 				function save() {
-				var commasv="";
+				var commasv="Факултетен номер;Коментар;Оценка;Дата;ID на лектора\r\n";
 				var lecturer=<?php echo $userid;?>;
 				var today=new Date();
 				var textareas = document.getElementsByTagName('textarea');
